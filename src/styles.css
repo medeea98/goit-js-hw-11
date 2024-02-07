@@ -36,6 +36,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-left: 300px;
+    outline: none;
   }
   
   button[type="submit"], button[type="button"] {
@@ -43,12 +44,14 @@
     background-color: gainsboro;
     color: #fff;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    position: absolute;
+    right: 430px
   }
   
   button[type="submit"]:hover, button[type="button"]:hover {
-    background-color: white;
+    background-color: rgb(136, 136, 184);
+  
   }
   
   .gallery {
