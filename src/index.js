@@ -4,10 +4,10 @@ import SimpleLightbox from 'simplelightbox';
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("search-form");
-  const gallery = document.querySelector(".gallery");
   const loadMoreBtn = document.querySelector(".load-more");
   let page = 1;
   const lightbox = new SimpleLightbox('.gallery a');
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const searchQuery = form.searchQuery.value.trim();
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await axios.get("https://pixabay.com/api/", {
         params: {
-          key: "YOUR_API_KEY",
+          key: "39728913-c0ee6c2d48ec23bc7f8279286",
           q: searchQuery,
           image_type: "photo",
           orientation: "horizontal",
@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
           per_page: 40,
         },
       });
+
+      const gallery = document.querySelector(".gallery"); 
+      if (!gallery) return; 
 
       if (response.data.hits.length === 0) {
         Notiflix.Notify.failure(
@@ -59,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function createPhotoCard(image) {
+    console.log("createPhotoCard function called");
     const card = document.createElement("div");
     card.classList.add("photo-card");
     const link = document.createElement("a");
@@ -103,10 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function scrollToGallery() {
-    const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: "smooth",
-    });
+    const gallery = document.querySelector(".gallery");
+    if (gallery) {
+      const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: "smooth",
+      });
+    }
   }
 });
