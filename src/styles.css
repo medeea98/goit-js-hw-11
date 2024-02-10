@@ -97,5 +97,25 @@
   .load-more:hover {
     background-color: #218838;
   }
-  
-  
+  @media only screen and (max-width: 1000px) {
+    button[type="submit"], button[type="button"] {
+        padding: 10px;
+        background-color: gainsboro;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 280px
+      }
+  }
+  @media only screen and (max-width: 700px) {
+    button[type="submit"], button[type="button"] {
+        padding: 10px;
+        background-color: gainsboro;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 20px
+      }
+  }
