@@ -60,8 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
   loadMoreBtn.addEventListener("click", () => {
     form.dispatchEvent(new Event("submit"));
     scrollToGallery();
-  });
+    loadMoreBtn.classList.remove('hidden');
+    loadMoreBtn.classList.add('load-more');
 
+  });
   function createPhotoCard(image) {
     console.log("createPhotoCard function called");
     const card = document.createElement("div");
@@ -72,15 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
         </a>
     `;
-
     const info = `
-        <div class="info">
-            <p class="info-item"><b>Likes:</b> ${image.likes}</p>
-            <p class="info-item"><b>Views:</b> ${image.views}</p>
-            <p class="info-item"><b>Comments:</b> ${image.comments}</p>
-            <p class="info-item"><b>Downloads:</b> ${image.downloads}</p>
-        </div>
-    `;
+    <div class="info">
+        <p class="info-item"><b>Likes:</b> <span class="like-number">${image.likes}</span></p>
+        <p class="info-item"><b>Views:</b> <span class="view-number">${image.views}</span></p>
+        <p class="info-item"><b>Comments:</b> <span class="comment-number">${image.comments}</span></p>
+        <p class="info-item"><b>Downloads:</b> <span class="download-number">${image.downloads}</span></p>
+    </div>
+`;
+
 
     card.innerHTML = link + info;
 
