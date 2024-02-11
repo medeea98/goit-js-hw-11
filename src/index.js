@@ -30,19 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const gallery = document.querySelector(".gallery"); 
       if (!gallery) return; 
 
+      gallery.innerHTML = "";
+      
       if (response.data.hits.length === 0) {
         Notiflix.Notify.failure(
           "Sorry, there are no images matching your search query. Please try again."
         );
         return;
       }
-      gallery.innerHTML = "";
-      if (page === 1) {
-        Notiflix.Notify.success(
-          `Hooray! We found ${response.data.totalHits} images.`
-        );
-        loadMoreBtn.style.display = "block";
-      }
+      Notiflix.Notify.success(
+        `Hooray! We found ${response.data.totalHits} images.`
+      );
+      loadMoreBtn.style.display = "block";
+
       response.data.hits.forEach((image) => {
         const card = createPhotoCard(image);
         gallery.appendChild(card);
@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollToGallery();
     loadMoreBtn.classList.remove('hidden');
     loadMoreBtn.classList.add('load-more');
-
   });
+
   function createPhotoCard(image) {
     console.log("createPhotoCard function called");
     
@@ -80,11 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="info-item"><b>Comments:</b> <span class="comment-number">${image.comments}</span></p>
         <p class="info-item"><b>Downloads:</b> <span class="download-number">${image.downloads}</span></p>
     </div>
-`;
+    `;
     card.innerHTML = link + info;
 
     return card;
-}
+  }
+
   function scrollToGallery() {
     const gallery = document.querySelector(".gallery");
     if (gallery) {
