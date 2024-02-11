@@ -59,9 +59,10 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+
   
   .photo-card {
-    width: calc(50% - 10px);
+    width: calc(20% - 20px);
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
