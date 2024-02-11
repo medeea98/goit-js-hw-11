@@ -4,6 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const form = document.getElementById("search-form");
   const loadMoreBtn = document.querySelector(".load-more");
   let page = 1;
@@ -27,28 +28,28 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
 
-      const gallery = document.querySelector(".gallery"); 
-      if (!gallery) return; 
+      const gallery = document.querySelector(".gallery");
+      if (!gallery) return;
 
-      gallery.innerHTML = "";
-      
       if (response.data.hits.length === 0) {
         Notiflix.Notify.failure(
           "Sorry, there are no images matching your search query. Please try again."
         );
+        loadMoreBtn.style.display = "none"; 
         return;
       }
-      Notiflix.Notify.success(
-        `Hooray! We found ${response.data.totalHits} images.`
-      );
-      loadMoreBtn.style.display = "block";
-
+      gallery.innerHTML = "";
+      
+        Notiflix.Notify.success(
+          `Hooray! We found ${response.data.totalHits} images.`
+        );
+      
       response.data.hits.forEach((image) => {
         const card = createPhotoCard(image);
         gallery.appendChild(card);
       });
       lightbox.refresh();
-
+      loadMoreBtn.style.display = "block"; 
       page++;
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -64,10 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createPhotoCard(image) {
     console.log("createPhotoCard function called");
-    
     const card = document.createElement("div");
     card.classList.add("photo-card");
-    
+
     const link = `
         <a href="${image.largeImageURL}" data-lightbox="gallery" data-title="${image.tags}">
             <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
