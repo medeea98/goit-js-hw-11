@@ -36,15 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         return;
       }
-
+      gallery.innerHTML = "";
       if (page === 1) {
-        gallery.innerHTML = ""; 
         Notiflix.Notify.success(
           `Hooray! We found ${response.data.totalHits} images.`
         );
         loadMoreBtn.style.display = "block";
       }
-
       response.data.hits.forEach((image) => {
         const card = createPhotoCard(image);
         gallery.appendChild(card);
@@ -66,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   function createPhotoCard(image) {
     console.log("createPhotoCard function called");
+    
     const card = document.createElement("div");
     card.classList.add("photo-card");
     
@@ -82,14 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="info-item"><b>Downloads:</b> <span class="download-number">${image.downloads}</span></p>
     </div>
 `;
-
-
     card.innerHTML = link + info;
 
     return card;
 }
-
-
   function scrollToGallery() {
     const gallery = document.querySelector(".gallery");
     if (gallery) {
